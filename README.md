@@ -1,6 +1,6 @@
-# Sage BACnet
+# SageGlass via BACnet
 
-Folgende Module beinhaltet das Sage BACnet Repository:
+Folgende Module beinhaltet das SageGlass (BACnet) Repository:
 
-- __Sage BACnet__ ([Dokumentation](Sage%20BACnet))  
-	Kurze Beschreibung des Moduls.
+- __SageGlass (BACnet)__ ([Dokumentation](SageGlass))  
+	Integriert die SageGlass SIM II (BACnet) in IP-Symcon

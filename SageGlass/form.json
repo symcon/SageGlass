@@ -22,8 +22,8 @@
         },
         {
             "type": "SelectVariable",
-            "name": "ZoneStatus",
-            "caption": "Zone Status"
+            "name": "Status",
+            "caption": "Status"
         }
     ],
     "actions": [],

@@ -69,8 +69,8 @@ declare(strict_types=1);
 				
 			if (!IPS_VariableProfileExists('SBN.Status')) {
                 IPS_CreateVariableProfile('SBN.Status', VARIABLETYPE_INTEGER);
-                IPS_SetVariableProfileAssociation('SBN.Status', 0, 'in transition', '', -1);
-                IPS_SetVariableProfileAssociation('SBN.Status', 1, 'holding', '', -1);
+                IPS_SetVariableProfileAssociation('SBN.Status', 0, 'In transition', '', -1);
+                IPS_SetVariableProfileAssociation('SBN.Status', 1, 'Holding', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.Status', 255, 'Power-up', '', -1);
 			}
 		}
@@ -113,7 +113,6 @@ declare(strict_types=1);
 			} elseif ($SenderID == $this->ReadPropertyInteger('AutomodeState')) {
 				$this->SetValue('AutomodeStatus', $Data[0] & 0x07);
 				$this->SetValue('VariableTintPriorityStatus', ($Data[0] >> 4) & 0x07);
-
 			} elseif ($SenderID == $this->ReadPropertyInteger('LuxLevelSetPoint')) {
 				$this->SetValue('LuxLevelSetPoint', ($Data[0] & 0x7FFF)) / 4;
 			} elseif ($SenderID == $this->ReadPropertyInteger('Sensor')) {
