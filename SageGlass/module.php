@@ -31,7 +31,6 @@ declare(strict_types=1);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 28, '20 %', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 49, '6 %', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 82, '1 %', '', -1);
-                IPS_SetVariableProfileValues('SBN.VariableTint', 0, 127, 1);
 			}
 
 			if (!IPS_VariableProfileExists('SBN.AutomodeStatus')) {
@@ -41,10 +40,8 @@ declare(strict_types=1);
                 IPS_SetVariableProfileAssociation('SBN.AutomodeStatus', 2, 'Off', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.AutomodeStatus', 3, 'In Override', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.AutomodeStatus', 4, 'Glare Control', '', -1);
-                IPS_SetVariableProfileAssociation('SBN.AutomodeStatus', 5, 'Not Applicable', '', -1);
-                IPS_SetVariableProfileAssociation('SBN.AutomodeStatus', 6, 'Not Applicable', '', -1);
-                IPS_SetVariableProfileAssociation('SBN.AutomodeStatus', 7, 'Not Applicable', '', -1);
 			}
+
 			if (!IPS_VariableProfileExists('SBN.VariableTintPriorityStatus')) {
 				IPS_CreateVariableProfile('SBN.VariableTintPriorityStatus', VARIABLETYPE_INTEGER);
 				IPS_SetVariableProfileAssociation('SBN.VariableTintPriorityStatus', 0, 'None', '', -1);
@@ -56,14 +53,15 @@ declare(strict_types=1);
 
 			if (!IPS_VariableProfileExists('SBN.LuxLevelSetPoint')) {
                 IPS_CreateVariableProfile('SBN.LuxLevelSetPoint', VARIABLETYPE_INTEGER);
-                IPS_SetVariableProfileText('SBN.LuxLevelSetPoint', '', 'lx');
 				IPS_SetVariableProfileAssociation('SBN.LuxLevelSetPoint', 65535, 'Power-up', '', -1);
+				IPS_SetVariableProfileAssociation('SBN.LuxLevelSetPoint', 1, 'Power-%d lx', '', -1);
+                IPS_SetVariableProfileValues('SBN.LuxLevelSetPion', 0, 65535, 4);
 			}
 
 			if (!IPS_VariableProfileExists('SBN.Sensor')) {
 				IPS_CreateVariableProfile('SBN.Sensor', VARIABLETYPE_INTEGER);
-                IPS_SetVariableProfileText('SBN.Sensor', '', 'lx');
 				IPS_SetVariableProfileAssociation('SBN.Sensor', 65535, 'Power-up', '', -1);
+				IPS_SetVariableProfileAssociation('SBN.Sensor', 1, '%d lx', '', -1);
 
 			}
 				
@@ -97,6 +95,7 @@ declare(strict_types=1);
 
 		private function setupVariable($ident) {
 			$this->RegisterVariableInteger($ident, $ident, 'SBN.' . $ident, 0);
+            $this->EnableAction($ident);
 			if ($ident == 'AutomodeStatus' || $ident == 'VariableTintPriorityStatus') {
                 $ident = 'AutomodeState';
 			}
@@ -110,11 +109,21 @@ declare(strict_types=1);
 		public function MessageSink($TimeStamp, $SenderID, $Message, $Data) {
 			if ($SenderID == $this->ReadPropertyInteger('VariableTint')) {
 				$this->SetValue('VariableTint', $Data[0] & 0x7F);
+
 			} elseif ($SenderID == $this->ReadPropertyInteger('AutomodeState')) {
-				$this->SetValue('AutomodeStatus', $Data[0] & 0x07);
-				$this->SetValue('VariableTintPriorityStatus', ($Data[0] >> 4) & 0x07);
+                if ($Data[0] != 255) {
+					$this->SetValue('AutomodeStatus', $Data[0] & 0x07);
+					$this->SetValue('VariableTintPriorityStatus', ($Data[0] >> 4) & 0x07);
+                }
+
+
 			} elseif ($SenderID == $this->ReadPropertyInteger('LuxLevelSetPoint')) {
-				$this->SetValue('LuxLevelSetPoint', ($Data[0] & 0x7FFF)) / 4;
+                if ($Data[0] != 65535) {
+					$this->SetValue('LuxLevelSetPoint', ($Data[0] & 0x7FFF)) / 4;
+				} else {
+                    $this->SetValue('LuxLevelSetPoint', 65535);
+				}
+
 			} elseif ($SenderID == $this->ReadPropertyInteger('Sensor')) {
 				if ($Data[0] != 65535) {
 					$this->SetValue('Sensor', $Data[0] / 2);
@@ -122,8 +131,20 @@ declare(strict_types=1);
 					$this->SetValue('Sensor', 65535);
 				}
 			} elseif ($SenderID == $this->ReadPropertyInteger('Status')) {
-                $this->SetValue('Status', $Data[0] & 0x01);
+                if ($Data[0] != 255) {
+                    $this->SetValue('Status', $Data[0] & 0x01);
+                } else {
+                    $this->SetValue('Status', 255);
+				}
 			}
 			//TODO Default power state
+		}
+
+		public function RequestAction($Ident, $Value) {
+			
+			switch($Ident) {
+				case 'VariableTint': 
+                    $this->RequestAction('VariableTint', $Value);
+			}
 		}
 	}
