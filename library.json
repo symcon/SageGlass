@@ -1,0 +1,12 @@
+{
+    "id": "{4D5D3556-90CA-5358-D7D5-8D1196133976}",
+    "name": "SageGlass",
+    "author": "Symcon GmbH",
+    "url": "https://symcon.de",
+    "compatibility": {
+        "version": "5.6"
+    },
+    "version": "1.0",
+    "build": 0,
+    "date": 0
+}

@@ -1,0 +1,12 @@
+{
+    "id": "{67CEA419-A625-703E-2BE6-BF51B3C913B9}",
+    "name": "SageGlass",
+    "type": 3,
+    "vendor": "",
+    "aliases": [],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "SBN",
+    "url": "https://symcon.de"
+}

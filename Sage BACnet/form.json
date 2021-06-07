@@ -1,0 +1,31 @@
+{
+    "elements": [
+        {
+            "type": "SelectVariable",
+            "name": "VariableTint",
+            "caption": "Variable Tint"
+        },
+        {
+            "type": "SelectVariable",
+            "name": "AutomodeState",
+            "caption": "Automode State"
+        },
+        {
+            "type": "SelectVariable",
+            "name": "LuxLevelSetPoint",
+            "caption": "Lux Level Set Point"
+        },
+        {
+            "type": "SelectVariable",
+            "name": "Sensor",
+            "caption": "Sensor"
+        },
+        {
+            "type": "SelectVariable",
+            "name": "ZoneStatus",
+            "caption": "Zone Status"
+        }
+    ],
+    "actions": [],
+    "status": []
+}
