@@ -1,6 +1,27 @@
 {
     "translations": {
         "de": {
+            "Automode Status": "Automodus Status",
+            "Automode State": "Automodus Zustand",
+            "Lux Level Set Point": "Lux Sollwert",
+            "Sensor": "Sensor",
+            "Status": "Status",
+            "Variable Tint": "Dynamische Tönung",
+            "Variable Tint Priority Status": "Prioritätsstatus der dynamischen Tönung",
+            "In transition": "Im Übergang",
+            "Holding": "Halten",
+            "None": "Keine",
+            "Low": "Niedrig",
+            "Medium": "High",
+            "High": "Hoch",
+            "Power-up": "Hochfahren",
+            "Clear": "Klar",
+            "Disabled": "Deaktiviert",
+            "Enabled": "Aktiviert",
+            "Off": "Aus",
+            "In Override": "Wird überschrieben",
+            "Glare Control": "Blendschutz",
+            "not supported": "nicht unterstützt"
         }
     }
 }
