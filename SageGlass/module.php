@@ -11,7 +11,6 @@ declare(strict_types=1);
             //Properties
             $this->RegisterPropertyInteger('VariableTint', 0);
             $this->RegisterPropertyInteger('AutomodeState', 0);
-            $this->RegisterPropertyInteger('VariableTintPriorityStatus', 0);
             $this->RegisterPropertyInteger('LuxLevelSetPoint', 0);
             $this->RegisterPropertyInteger('Sensor', 0);
             $this->RegisterPropertyInteger('Status', 0);
