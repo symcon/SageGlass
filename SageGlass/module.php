@@ -163,16 +163,4 @@ declare(strict_types=1);
 
             $this->SetValue($Ident, $Value);
         }
-
-        private function setupVariable($ident)
-        {
-            $this->RegisterVariableInteger($ident, $this->Translate($this->splitCamelCase($ident)), 'SBN.' . $ident, 0);
-            if (!in_array($ident, ['Sensor', 'Status', 'VariableTintPriorityStatus'])) {
-                $this->EnableAction($ident);
-            }
-            if ($ident == 'AutomodeStatus' || $ident == 'VariableTintPriorityStatus') {
-                $ident = 'AutomodeState';
-            }
-            $this->RegisterMessage($this->ReadPropertyInteger($ident), VM_UPDATE);
-        }
     }
