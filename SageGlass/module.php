@@ -92,7 +92,6 @@ declare(strict_types=1);
             }
             $this->RegisterMessage($this->ReadPropertyInteger('VariableTint'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('AutomodeState'), VM_UPDATE);
-            $this->RegisterMessage($this->ReadPropertyInteger('VariableTintPriorityStatus'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('LuxLevelSetPoint'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('Sensor'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('Status'), VM_UPDATE);
