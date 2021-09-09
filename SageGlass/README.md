@@ -27,16 +27,35 @@ Beschreibung des Moduls.
 ```
 <?php
 
+// Not every zone has a sensor - Normally each facade will have a vertical/horizontal sensor
+// Fill these arrays with the sensor -> zone information
+// e.g. Sensor 1 (Vertical) is used for Zone 10, Zone 20 and Zone 25
+$sensorVertical = [
+    1 => [10, 20, 25]
+];
+$sensorHorizontal = [];
+
 $zones = 250;
 for ($i = 1; $i <= $zones; $i++) {
 	$variableTintID = searchBACnet(2 /* Analoge Value */, $i + 1 /* Zone 1 = 2 */);
 	$automodeStateID = searchBACnet(2 /* Analoge Value */, $i + 2001 /* Zone 1 = 2002 */);
 	$luxLevelSetPointID = searchBACnet(2 /* Analoge Value */, $i + 4001 /* Zone 1 = 4002 */);
-	$sensorID = searchBACnet(0 /* Analoge Input */, $i + 2000 /* Zone 1 = 2001 */);
 	$statusID = searchBACnet(0 /* Analoge Input */, $i + 4000 /* Zone 1 = 4001 */);
 
+    // Search for the our sensor the vertical sensor matrix
+    $verticalSensorID = searchSensorID($i, $sensorVertical);
+    if ($verticalSensorID) {
+	    $verticalSensorID = searchBACnet(0 /* Analoge Input */, $verticalSensorID + 2000 /* Sensor 1 = 2001 */);
+    }
+
+    // Search for the our sensor the vertical sensor matrix
+    $horizontalSensorID = searchSensorID($i, $sensorHorizontal);
+    if ($horizontalSensorID) {
+	    $horizontalSensorID = searchBACnet(0 /* Analoge Input */, $horizontalSensorID + 2000 /* Sensor 1 = 2001 */);
+    }
+
 	if (!@IPS_GetObjectIDByIdent("SageGlassZone" . $i)) {
-		if ($variableTintID && $automodeStateID && $luxLevelSetPointID && $sensorID && $statusID) {
+		if ($variableTintID && $automodeStateID && $luxLevelSetPointID && $verticalSensorID && $horizontalSensorID && $statusID) {
 			echo "Creating Zone " . $i . "..." . PHP_EOL;
 			$id = IPS_CreateInstance("{67CEA419-A625-703E-2BE6-BF51B3C913B9}");
 			IPS_SetName($id, "Zone " . $i);
@@ -44,11 +63,23 @@ for ($i = 1; $i <= $zones; $i++) {
 			IPS_SetProperty($id, "VariableTint", $variableTintID);
 			IPS_SetProperty($id, "AutomodeState", $automodeStateID);
 			IPS_SetProperty($id, "LuxLevelSetPoint", $luxLevelSetPointID);
-			IPS_SetProperty($id, "Sensor", $sensorID);
 			IPS_SetProperty($id, "Status", $statusID);
+			IPS_SetProperty($id, "SensorVertical", $verticalSensorID);
+			IPS_SetProperty($id, "SensorHorizontal", $horizontalSensorID);
 			IPS_ApplyChanges($id);
 		}
 	}
+}
+
+function searchSensorID($zone, $sensorMatrix) {
+    foreach($sensorMatrix as $sensor => $matrix) {
+        foreach($matrix as $sensorZone) {
+            if ($zone == $sensorZone) {
+                return $sensor;
+            }
+        }
+    }
+    return 0;
 }
 
 function searchBACnet($objectType, $instanceNumber) {
