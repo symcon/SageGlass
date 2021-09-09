@@ -12,8 +12,9 @@ declare(strict_types=1);
             $this->RegisterPropertyInteger('VariableTint', 0);
             $this->RegisterPropertyInteger('AutomodeState', 0);
             $this->RegisterPropertyInteger('LuxLevelSetPoint', 0);
-            $this->RegisterPropertyInteger('Sensor', 0);
             $this->RegisterPropertyInteger('Status', 0);
+            $this->RegisterPropertyInteger('SensorVertical', 0);
+            $this->RegisterPropertyInteger('SensorHorizontal', 0);
 
             //Profiles
             if (!IPS_VariableProfileExists('SBN.VariableTint')) {
@@ -71,8 +72,9 @@ declare(strict_types=1);
             $this->RegisterVariableInteger('VariableTintPriorityStatus', $this->Translate('Variable Tint Priority Status'), 'SBN.VariableTintPriorityStatus', 2);
             $this->RegisterVariableInteger('LuxLevelSetPoint', $this->Translate('Lux Level Set Point'), 'SBN.LuxLevelSetPoint', 3);
             $this->EnableAction('LuxLevelSetPoint');
-            $this->RegisterVariableInteger('Sensor', $this->Translate('Sensor'), 'SBN.Sensor', 4);
-            $this->RegisterVariableInteger('Status', $this->Translate('Status'), 'SBN.Status', 5);
+            $this->RegisterVariableInteger('Status', $this->Translate('Status'), 'SBN.Status', 4);
+            $this->RegisterVariableInteger('SensorVertical', $this->Translate('Sensor (Vertical)'), 'SBN.Sensor', 5);
+            $this->RegisterVariableInteger('SensorHorizontal', $this->Translate('Sensor (Horizontal)'), 'SBN.Sensor', 6);
         }
 
         public function Destroy()
@@ -93,8 +95,9 @@ declare(strict_types=1);
             $this->RegisterMessage($this->ReadPropertyInteger('VariableTint'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('AutomodeState'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('LuxLevelSetPoint'), VM_UPDATE);
-            $this->RegisterMessage($this->ReadPropertyInteger('Sensor'), VM_UPDATE);
             $this->RegisterMessage($this->ReadPropertyInteger('Status'), VM_UPDATE);
+            $this->RegisterMessage($this->ReadPropertyInteger('SensorVertical'), VM_UPDATE);
+            $this->RegisterMessage($this->ReadPropertyInteger('SensorHorizontal'), VM_UPDATE);
         }
 
         public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
@@ -112,17 +115,23 @@ declare(strict_types=1);
                 } else {
                     $this->SetValue('LuxLevelSetPoint', 126972);
                 }
-            } elseif ($SenderID == $this->ReadPropertyInteger('Sensor')) {
-                if ($Data[0] != 65535) {
-                    $this->SetValue('Sensor', $Data[0] / 2);
-                } else {
-                    $this->SetValue('Sensor', 65535);
-                }
             } elseif ($SenderID == $this->ReadPropertyInteger('Status')) {
                 if ($Data[0] != 255) {
                     $this->SetValue('Status', $Data[0] & 0x01);
                 } else {
                     $this->SetValue('Status', 255);
+                }
+            } elseif ($SenderID == $this->ReadPropertyInteger('SensorVertical')) {
+                if ($Data[0] != 65535) {
+                    $this->SetValue('SensorVertical', $Data[0] / 2);
+                } else {
+                    $this->SetValue('SensorVertical', 65535);
+                }
+            } elseif ($SenderID == $this->ReadPropertyInteger('SensorHorizontal')) {
+                if ($Data[0] != 65535) {
+                    $this->SetValue('SensorHorizontal', $Data[0] / 2);
+                } else {
+                    $this->SetValue('SensorHorizontal', 65535);
                 }
             }
         }

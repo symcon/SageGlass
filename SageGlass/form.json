@@ -17,13 +17,18 @@
         },
         {
             "type": "SelectVariable",
-            "name": "Sensor",
+            "name": "Status",
+            "caption": "Status"
+        },
+        {
+            "type": "SelectVariable",
+            "name": "SensorVertical",
             "caption": "Sensor"
         },
         {
             "type": "SelectVariable",
-            "name": "Status",
-            "caption": "Status"
+            "name": "SensorHorizontal",
+            "caption": "Sensor"
         }
     ],
     "actions": [],
