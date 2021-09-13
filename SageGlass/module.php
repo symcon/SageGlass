@@ -20,10 +20,10 @@ declare(strict_types=1);
             if (!IPS_VariableProfileExists('SBN.VariableTint')) {
                 IPS_CreateVariableProfile('SBN.VariableTint', VARIABLETYPE_INTEGER);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 0, $this->Translate('Clear'), '', -1);
-                IPS_SetVariableProfileAssociation('SBN.VariableTint', 127, $this->Translate('Power-up'), '', -1);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 28, '20 %', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 49, '6 %', '', -1);
                 IPS_SetVariableProfileAssociation('SBN.VariableTint', 82, '1 %', '', -1);
+                IPS_SetVariableProfileAssociation('SBN.VariableTint', 127, $this->Translate('Power-up'), '', -1);
             }
 
             if (!IPS_VariableProfileExists('SBN.AutomodeStatus')) {
