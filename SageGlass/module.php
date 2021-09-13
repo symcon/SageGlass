@@ -123,13 +123,13 @@ declare(strict_types=1);
                 }
             } elseif ($SenderID == $this->ReadPropertyInteger('SensorVertical')) {
                 if ($Data[0] != 65535) {
-                    $this->SetValue('SensorVertical', $Data[0] / 2);
+                    $this->SetValue('SensorVertical', $Data[0] * 2);
                 } else {
                     $this->SetValue('SensorVertical', 65535);
                 }
             } elseif ($SenderID == $this->ReadPropertyInteger('SensorHorizontal')) {
                 if ($Data[0] != 65535) {
-                    $this->SetValue('SensorHorizontal', $Data[0] / 2);
+                    $this->SetValue('SensorHorizontal', $Data[0] * 2);
                 } else {
                     $this->SetValue('SensorHorizontal', 65535);
                 }
