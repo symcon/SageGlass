@@ -23,12 +23,12 @@
         {
             "type": "SelectVariable",
             "name": "SensorVertical",
-            "caption": "Sensor"
+            "caption": "Sensor (Vertical)"
         },
         {
             "type": "SelectVariable",
             "name": "SensorHorizontal",
-            "caption": "Sensor"
+            "caption": "Sensor (Horizontal)"
         }
     ],
     "actions": [],

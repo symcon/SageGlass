@@ -1,5 +1,5 @@
 # SageGlass
-Beschreibung des Moduls.
+Dieses Modul erlaubt die Einbindung SageGlass SIM II Controller über BACnet/IP. 
 
 ### Inhaltsverzeichnis
 
@@ -22,7 +22,7 @@ Beschreibung des Moduls.
 
 ### 4. Einrichten in IP-Symcon
 
-* Es wird empfohlen alle BACnet Objekte auf dem SageGlass SIM II Controller automatisch erstellen zu lassen, wodurch die einzelnen Datenpunkte in IP-Symcon verfügbar gemacht werden. Im zweiten Schritt kann nachfolgendes Skript verwendet werden, um die SageGlass Instanzen für die Zonen zu erstellen, welche die Informationen schöner aufbereiten.
+* Es wird empfohlen alle BACnet Objekte auf dem SageGlass SIM II Controller automatisch erstellen zu lassen, wodurch die einzelnen Datenpunkte in IP-Symcon verfügbar gemacht werden. Im zweiten Schritt kann nachfolgendes Skript verwendet werden, um die SageGlass Instanzen für die Zonen zu erstellen, welche die Informationen schöner aufbereiten. Es ist auch möglich die Verknüpfungen manuell durchzuführen, indem alle Eigenschaften auf die korrekten BACnet Objekte verknüpft werden. Die Namen der Eigenschaften entsprechen dabei den Beschreibungen der BACnet Objekte und sollten auf die "Preset Value" Variable verknüpft werden.  
 
 ```
 <?php
