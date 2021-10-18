@@ -14,7 +14,7 @@ Dieses Modul erlaubt die Einbindung SageGlass SIM II Controller über BACnet/IP.
 
 ### 2. Vorraussetzungen
 
-- IP-Symcon ab Version 6.0
+- IP-Symcon Enterprise ab Version 6.0 mit BACnet Erweiterung
 
 ### 3. Software-Installation
 
