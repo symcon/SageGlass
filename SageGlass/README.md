@@ -12,7 +12,7 @@ Dieses Modul erlaubt die Einbindung SageGlass SIM II Controller über BACnet/IP.
 
 * Integriert die Ansteuerung von SageGlass Zonen und zeigt den aktuellen Zustand inkl. der übermittelten Lux-Werte an.
 
-### 2. Vorraussetzungen
+### 2. Voraussetzungen
 
 - IP-Symcon Enterprise ab Version 6.0 mit BACnet Erweiterung
 
