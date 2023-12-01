@@ -22,7 +22,9 @@
             "Off": "Aus",
             "In Override": "Wird überschrieben",
             "Glare Control": "Blendschutz",
-            "not supported": "nicht unterstützt"
+            "not supported": "nicht unterstützt",
+            "https://www.symcon.de/en/service/documentation/module-reference/sageglass-bacnet/": "https://www.symcon.de/de/service/dokumentation/modulreferenz/sageglass-bacnet/",
+            "": "SageGlass"
         }
     }
 }
